@@ -1,367 +1,238 @@
-# Prediction of Preeclampsia Using Machine Learning Approaches
-
 <div align="center">
 
-### AI-Powered Maternal Health & Preeclampsia Risk Assessment System
+# Preeclampsia Risk Prediction System
+### A Machine Learning Approach to Maternal Health Screening
 
-A Machine Learning-based healthcare application for maternal health risk assessment, preeclampsia prediction, interactive analytics, and AI-assisted healthcare support.
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://python.org)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io)
+[![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML_Models-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org)
+[![Gemini](https://img.shields.io/badge/Gemini-Chatbot-4285F4?logo=google&logoColor=white)](https://ai.google.dev)
+[![Render](https://img.shields.io/badge/Render-Deployed-46E3B7?logo=render&logoColor=white)](https://render.com)
 
-<br>
-
-![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-Web_App-red?logo=streamlit)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine_Learning-orange?logo=scikitlearn)
-![Pandas](https://img.shields.io/badge/Pandas-Data_Analysis-purple?logo=pandas)
-![NumPy](https://img.shields.io/badge/NumPy-Scientific_Computing-blue?logo=numpy)
-![Plotly](https://img.shields.io/badge/Plotly-Analytics-green?logo=plotly)
-![Gemini](https://img.shields.io/badge/Gemini-AI_Chatbot-orange?logo=google)
-![Render](https://img.shields.io/badge/Render-Deployed-success)
-![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Landing_Page-black?logo=github)
+**[Live Landing Page](https://priyankalisa.github.io/maternal-health-preeclampsia-system/) · [Launch App](https://maternal-health-preeclampsia-system.onrender.com/)**
 
 </div>
 
 ---
-<div align="center">
-    
-## 🚀 Live Demo
 
-🌐 **Landing Page**  
-https://priyankalisa.github.io/maternal-health-preeclampsia-system/
+## Table of Contents
 
-🏥 **Streamlit Application**  
-https://maternal-health-preeclampsia-system.onrender.com/
-
-</div>
-
----
-# 🌟 Project Overview
-
-The **Prediction of Preeclampsia Using Machine Learning Approaches** is an AI-powered healthcare application designed to support the early identification of maternal health risks and preeclampsia during pregnancy.
-
-The platform combines **Machine Learning**, **Generative AI**, and **Interactive Analytics** to provide a complete healthcare screening experience through a user-friendly web interface.
+1. [Overview](#overview)
+2. [Why This Matters](#why-this-matters)
+3. [How It Works](#how-it-works)
+4. [Features](#features)
+5. [Pipeline](#pipeline)
+6. [Input Parameters](#input-parameters)
+7. [Datasets](#datasets)
+8. [Architecture](#architecture)
+9. [Project Structure](#project-structure)
+10. [What You'll Learn](#what-youll-learn)
+11. [Disclaimer](#disclaimer)
 
 ---
 
-## 🏥 What Does the System Do?
+## Overview
 
-🔹 Assess Overall Maternal Health Risk
+Preeclampsia is a pregnancy-related disorder that can escalate quickly and put both mother and baby at risk — yet with early screening, much of that risk is manageable. This project builds a two-stage machine learning system that flags maternal health risk first, then screens high-risk cases specifically for preeclampsia, wrapping the whole thing in an interactive Streamlit app with AI-assisted guidance.
 
-🔹 Identify High-Risk Pregnancies Using Machine Learning
+It's built to demonstrate a complete healthcare ML product: data → models → deployed app → chatbot → report generation, not just a notebook with an accuracy score.
 
-🔹 Perform Secondary Preeclampsia Risk Assessment
+## Why This Matters
 
-🔹 Generate Downloadable Patient Health Reports (PDF)
+Preeclampsia and related maternal health complications are still under-detected in many settings, often due to:
 
-🔹 Provide AI-Powered Healthcare Assistance via Gemini
+- Diagnosis that comes too late in the pregnancy
+- Uneven access to routine prenatal screening
+- Gaps in continuous monitoring between visits
+- Low awareness of risk factors and warning signs
+- Delayed referral for medical intervention
 
-🔹 Generate Personalized Healthcare Recommendations
+A lightweight, accessible screening tool can help close some of that gap — this project is a step in that direction.
 
-🔹 Detect Emergency Warning Symptoms
+## How It Works
 
-🔹 Visualize Risk Through Interactive Dashboards
+The system runs a **dual-stage assessment**:
 
----
+| Stage | What Happens |
+|---|---|
+| **1. Intake** | The patient's clinical and demographic data is entered into the app |
+| **2. Maternal Risk Model** | A trained model classifies overall maternal health risk |
+| **3. Escalation Check** | If risk is high, the app automatically triggers a second, more specific assessment |
+| **4. Preeclampsia Model** | A dedicated model estimates preeclampsia risk from additional clinical markers |
+| **5. Guidance** | The app returns tailored recommendations and can generate a downloadable PDF report |
 
-## 🔄 Assessment Workflow
+## Features
 
-### 🩺 Step 1: Maternal Health Assessment
+- **Maternal Health Risk Assessment** — first-line screening from clinical inputs
+- **Preeclampsia Risk Prediction** — secondary, targeted screening for high-risk cases
+- **PDF Report Generation** — a shareable summary of the assessment
+- **Gemini-Powered Chatbot** — conversational support for maternal health questions
+- **Emergency Symptom Flagging** — surfaces warning signs that need urgent attention
+- **Personalized Recommendations** — advice tuned to the predicted risk level
+- **Analytics Dashboard** — interactive charts for exploring risk patterns
+- **Gauge-Style Risk Visuals** — quick, intuitive read on prediction outcomes
+- **Cross-Device Layout** — usable on desktop, tablet, and mobile
+- **Cloud-Hosted** — Streamlit app on Render, landing page on GitHub Pages
 
-Users enter maternal health information and clinical parameters.
-
-### 🤖 Step 2: Maternal Health Risk Prediction
-
-The Machine Learning model evaluates overall maternal health risk.
-
-### ⚠️ Step 3: High-Risk Screening
-
-If the patient is identified as **High Risk**, the system activates the second assessment stage.
-
-### 🏥 Step 4: Preeclampsia Prediction
-
-A dedicated Machine Learning model predicts preeclampsia risk using additional healthcare information.
-
-### 💡 Step 5: Healthcare Recommendations
-
-Personalized recommendations are generated based on the prediction outcome.
-
----
-
-## 🎯 Problem Statement
-
-Maternal health complications remain a major healthcare challenge worldwide.
-
-Among these complications, **Preeclampsia** is one of the most serious pregnancy-related disorders and can lead to severe maternal and fetal complications if not detected early.
-
-### Key Challenges
-
-- ❌ Delayed Diagnosis
-- ❌ Limited Healthcare Access
-- ❌ Insufficient Monitoring
-- ❌ Lack of Risk Awareness
-- ❌ Delayed Medical Intervention
-
-This project applies Machine Learning techniques to support early risk identification and healthcare awareness.
-
----
-
-## 🎯 Objectives
-
-- ✅ Predict maternal health risk using clinical indicators
-- ✅ Predict preeclampsia risk for high-risk pregnancies
-- ✅ Support early healthcare screening
-- ✅ Provide AI-powered healthcare assistance
-- ✅ Deliver personalized recommendations
-- ✅ Visualize healthcare insights through analytics
-- ✅ Demonstrate real-world healthcare AI applications
-
----
-
-## 🚀 Key Features
-
-| Feature | Description |
-|----------|-------------|
-| 🩺 Maternal Health Risk Assessment | Predicts maternal health risk using clinical and pregnancy-related parameters |
-| ⚠️ Preeclampsia Risk Prediction | Performs secondary preeclampsia screening for high-risk pregnancies |
-| 📄 PDF Report Generation | Generates downloadable patient health assessment reports |
-| 💬 AI Healthcare Chatbot | Gemini-powered healthcare assistant for maternal health guidance |
-| 🚨 Emergency Symptom Detection | Identifies critical warning symptoms requiring immediate medical attention |
-| 💡 Personalized Recommendations | Provides risk-specific healthcare recommendations and preventive guidance |
-| 📊 Interactive Analytics Dashboard | Visualizes healthcare insights through charts and analytics |
-| 📈 Risk Visualization | Displays prediction outcomes using interactive gauge indicators |
-| 🔄 Dual-Stage Assessment Workflow | Maternal Health Assessment → High-Risk Screening → Preeclampsia Assessment |
-| 🌐 GitHub Pages Landing Site | Professional project landing page with system overview |
-| ☁️ Cloud Deployment | Streamlit application deployed on Render |
-| 📱 Responsive Design | Optimized for desktop, tablet, and mobile devices |
-
----
-
-# 🧠 Machine Learning Pipeline Diagram
+## Pipeline
 
 ```mermaid
 flowchart LR
+A[Raw Data] --> B[Cleaning]
+B --> C[Feature Engineering]
+C --> D[Preprocessing]
+D --> E[Train / Test Split]
+E --> F[Model Training]
+F --> G[Evaluation]
+G --> H[Model Selection]
+H --> I[Serialization]
+I --> J[Streamlit Deployment]
+J --> K[Live Predictions]
 
-A[📊 Raw Dataset] --> B[🧹 Data Cleaning]
-B --> C[🧠 Feature Engineering]
-C --> D[⚙️ Data Preprocessing]
-D --> E[✂️ Train-Test Split]
-E --> F[🤖 Model Training]
-F --> G[📈 Model Evaluation]
-G --> H[🏆 Model Selection]
-H --> I[💾 Model Serialization]
-I --> J[🚀 Streamlit Deployment]
-J --> K[🔮 User Predictions]
-
-%% Styling
-classDef data fill:#FFEDD5,stroke:#FB923C,stroke-width:2px,color:#7C2D12;
-classDef process fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px,color:#1E3A8A;
-classDef model fill:#DCFCE7,stroke:#22C55E,stroke-width:2px,color:#14532D;
-classDef deploy fill:#F3E8FF,stroke:#A855F7,stroke-width:2px,color:#4C1D95;
+classDef data fill:#FEF3C7,stroke:#D97706,stroke-width:1.5px,color:#78350F;
+classDef model fill:#E0E7FF,stroke:#6366F1,stroke-width:1.5px,color:#312E81;
+classDef deploy fill:#D1FAE5,stroke:#059669,stroke-width:1.5px,color:#064E3B;
 
 class A,B data;
 class C,D,E,F,G,H model;
 class I,J,K deploy;
 ```
 
----
+## Input Parameters
 
-# 📊 Input Parameters
+<table>
+<tr>
+<td valign="top" width="50%">
 
-## 🩺 Maternal Health Features
+**Maternal Health Model**
 
-| Feature | Description |
-|----------|-------------|
+| Feature | Notes |
+|---|---|
 | Age | Patient age |
-| Gravida | Number of pregnancies |
-| Weight | Body weight |
-| Height | Height |
-| Gestation Period | Pregnancy duration |
-| Blood Pressure | Systolic & Diastolic BP |
-| Anemia | Anemia condition |
-| Albumin | Urine albumin status |
-| Blood Sugar | Blood sugar level |
-| Fetal Position | Baby position |
-| Fetal Heart Beat | Fetal heart rate |
-| Jaundice | Liver condition |
-| VDRL | Infection indicator |
-| HRsAG | Hepatitis indicator |
+| Gravida | Prior pregnancy count |
+| Weight / Height | Anthropometric data |
+| Gestation Period | Weeks pregnant |
+| Blood Pressure | Systolic & diastolic |
+| Anemia | Presence/absence |
+| Albumin | Urine albumin level |
+| Blood Sugar | Glucose reading |
+| Fetal Position | Positional status |
+| Fetal Heart Beat | BPM |
+| Jaundice | Liver function marker |
+| VDRL | Infection screening |
+| HRsAG | Hepatitis marker |
 
----
+</td>
+<td valign="top" width="50%">
 
-## 🫀 Preeclampsia Features
+**Preeclampsia Model**
 
-| Feature | Description |
-|----------|-------------|
-| Age | Maternal age in years |
-| Gravidity | Total number of pregnancies |
-| Gestational Age | Pregnancy duration in weeks |
-| Pre-Pregnancy BMI | Body Mass Index before pregnancy |
-| Systolic BP | Systolic blood pressure (mmHg) |
-| Diastolic BP | Diastolic blood pressure (mmHg) |
-| Hemoglobin | Hemoglobin level (g/dL) |
-| Anemia Status | Presence or absence of anemia |
-| Fasting Glucose | Fasting blood glucose level (mg/dL) |
-| Proteinuria | Presence of protein in urine |
-| HIV Status | HIV infection status |
+| Feature | Notes |
+|---|---|
+| Age | Maternal age (years) |
+| Gravidity | Total pregnancies |
+| Gestational Age | Weeks |
+| Pre-Pregnancy BMI | Baseline BMI |
+| Systolic BP | mmHg |
+| Diastolic BP | mmHg |
+| Hemoglobin | g/dL |
+| Anemia Status | Presence/absence |
+| Fasting Glucose | mg/dL |
+| Proteinuria | Urine protein presence |
+| HIV Status | Infection status |
 
----
+</td>
+</tr>
+</table>
 
-## 📊 Datasets Used
+## Datasets
 
-👉 Dataset 1: Zenodo Maternal Health Dataset  
-https://zenodo.org/records/14537882
+| Dataset | Source | Used For |
+|---|---|---|
+| **Zenodo Maternal Health Dataset** | [zenodo.org/records/14537882](https://zenodo.org/records/14537882) | Maternal Health Risk Model |
+| **Africa Synthetic Maternal Health Dataset** | [HuggingFace](https://huggingface.co/datasets/electricsheepafrica/africa-synth-maternal-health-maternal-health-pregnancy-all) | Preeclampsia Risk Model |
 
-👉 Dataset 2: Africa Synthetic Maternal Health Dataset  
-https://huggingface.co/datasets/electricsheepafrica/africa-synth-maternal-health-maternal-health-pregnancy-all
+The Zenodo set provides clinical and demographic records for general risk classification, while the Africa Synthetic set contributes pregnancy-specific lab measurements and history used for the more targeted preeclampsia model.
 
-### 📌 Description
-
-- The **Zenodo Maternal Health Dataset** contains clinical and demographic information used for maternal health risk assessment and classification.
-
-- The **Africa Synthetic Maternal Health Dataset** provides pregnancy-related healthcare indicators, laboratory measurements, maternal history, and risk factors that support preeclampsia risk prediction and high-risk pregnancy analysis.
-
-### 📋 Dataset Usage in This Project
-
-| Dataset | Purpose |
-|----------|----------|
-| Zenodo Maternal Health Dataset | Maternal Health Risk Prediction Model |
-| Africa Synthetic Maternal Health Dataset | Preeclampsia Risk Prediction Model |
----
-
-# 🏗️ System Architecture
+## Architecture
 
 ```mermaid
 flowchart TD
-
-A[🌐 GitHub Pages Landing Page] --> B[🚀 Launch Application]
-
-B --> C[☁️ Render Hosted Streamlit App]
-
-C --> D[📊 Main Dashboard]
-
-D --> E[🩺 Maternal Health Assessment]
-
-E --> F[🤖 Maternal Health ML Model]
-
-F --> G{⚠️ Risk Level?}
-
-G -->|🟢 Low Risk| H[✅ Maternal Health Result]
-
-G -->|🔴 High Risk| I[🚨 Preeclampsia Assessment]
-
-I --> J[🤖 Preeclampsia ML Model]
-
-J --> K[⚠️ Preeclampsia Risk Result]
-
-H --> L[💡 Personalized Recommendations]
+A[GitHub Pages: Landing] --> B[Launch App]
+B --> C[Render: Streamlit App]
+C --> D[Dashboard]
+D --> E[Maternal Health Form]
+E --> F[Maternal Health Model]
+F --> G{Risk Level}
+G -->|Low| H[Result: Low Risk]
+G -->|High| I[Preeclampsia Assessment]
+I --> J[Preeclampsia Model]
+J --> K[Result: Preeclampsia Risk]
+H --> L[Recommendations]
 K --> L
+L --> M[PDF Report]
+D --> N[Emergency Symptom Check]
+D --> O[AI Chatbot]
+O --> P[Gemini API]
+D --> Q[Analytics Dashboard]
+Q --> R[Visualizations]
 
-L --> M[📄 Generate PDF Health Report]
+classDef entry fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A;
+classDef core fill:#D1FAE5,stroke:#059669,color:#064E3B;
+classDef risk fill:#FEE2E2,stroke:#DC2626,color:#7F1D1D;
+classDef ai fill:#EDE9FE,stroke:#7C3AED,color:#4C1D95;
+classDef out fill:#FEF3C7,stroke:#D97706,color:#78350F;
 
-D --> N[🚨 Emergency Symptom Detection]
-
-D --> O[💬 AI Healthcare Chatbot]
-
-O --> P[✨ Gemini API]
-
-D --> Q[📈 Analytics Dashboard]
-
-Q --> R[📊 Interactive Visualizations]
-
-%% Styling
-classDef landing fill:#DBEAFE,stroke:#3B82F6,color:#1E3A8A,stroke-width:2px;
-classDef app fill:#DCFCE7,stroke:#22C55E,color:#14532D,stroke-width:2px;
-classDef risk fill:#FFE4E6,stroke:#F43F5E,color:#881337,stroke-width:2px;
-classDef ai fill:#F3E8FF,stroke:#A855F7,color:#4C1D95,stroke-width:2px;
-classDef report fill:#FFEDD5,stroke:#FB923C,color:#7C2D12,stroke-width:2px;
-
-class A,B,C landing;
-class D,E,F,Q,R app;
+class A,B,C entry;
+class D,E,F,Q,R core;
 class G,I,J,K,N risk;
 class O,P ai;
-class L,M report;
+class L,M out;
 ```
 
----
+## Project Structure
 
-# 📂 Project Structure
-
-```bash
+```
 maternal-health-preeclampsia-system/
-│
-├── 🌐 app/
-│   ├── 🚀 app.py
-│   ├── 💬 chatbot.py
-│   ├── ⚡ cache.py
-│   ├── 📄 doctor_advice.json
-│   │
-│   └── 🤖 models/
-│       ├── 📦 loader.py
-│       ├── 🧠 maternal_health_model.pkl
-│       └── ⚠️ preeclampsia_model.pkl
-│
-├── 🎨 .streamlit/
-│   └── ⚙️ config.toml
-│
-├── 🧑‍💻 .vscode/
+├── app/
+│   ├── app.py                      # Main Streamlit application
+│   ├── chatbot.py                  # Gemini-powered chatbot logic
+│   ├── cache.py                    # Performance caching layer
+│   ├── doctor_advice.json          # Rule-based advice & thresholds
+│   └── models/
+│       ├── loader.py               # Model loading utility
+│       ├── maternal_health_model.pkl
+│       └── preeclampsia_model.pkl
+├── .streamlit/
+│   └── config.toml                 # UI theme & layout config
+├── .vscode/
 │   └── settings.json
-│
-├── 🌍 index.html
-├── 📦 pyproject.toml
-├── 🚀 render.yaml
-├── 🔒 uv.lock
-├── 📘 README.md
-└── 🚫 .gitignore
+├── index.html                      # GitHub Pages landing page
+├── pyproject.toml                  # Dependencies & metadata
+├── render.yaml                     # Render deployment config
+├── uv.lock                         # Locked dependency versions
+├── README.md
+└── .gitignore
 ```
 
-## 📁 Directory Description
+## What You'll Learn
 
-| 📂 File / Folder | 📌 Description |
-|------------------|----------------|
-| `.streamlit/config.toml` | ⚙️ Streamlit configuration file for UI theme, layout, and app settings |
-| `.vscode/settings.json` | 🧑‍💻 VS Code workspace settings for consistent development environment |
-| `app/app.py` | 🚀 Main Streamlit application handling UI, workflow, and predictions |
-| `app/chatbot.py` | 💬 AI chatbot logic integrated with Gemini API for user interaction |
-| `app/cache.py` | ⚡ Caching system to optimize performance and reduce repeated computations |
-| `app/doctor_advice.json` | 📄 Contains medical advice, thresholds, and rule-based response data |
-| `app/models/loader.py` | 📦 Utility script to load trained ML models into the application |
-| `app/models/maternal_health_model.pkl` | 🧠 Trained ML model for maternal health risk prediction (Phase 1) |
-| `app/models/preeclampsia_model.pkl` | ⚠️ Trained ML model for preeclampsia risk prediction (Phase 2) |
-| `index.html` | 🌐 Landing page for GitHub Pages (frontend entry point) |
-| `pyproject.toml` | 📦 Project dependencies, metadata, and build configuration |
-| `render.yaml` | 🚀 Deployment configuration file for Render hosting |
-| `uv.lock` | 🔒 Locked dependency versions for reproducible environment |
-| `README.md` | 📘 Complete project documentation, setup guide, and workflow explanation |
-| `.gitignore` | 🚫 Specifies files and folders to exclude from Git version control |
+Working through this project touches on:
+
+- End-to-end ML workflow design
+- Healthcare data preprocessing & feature engineering
+- Model training, evaluation, and selection
+- Deploying ML models through Streamlit
+- Integrating a generative AI chatbot (Gemini API)
+- Cloud deployment across two platforms (Render + GitHub Pages)
+- Applying ML responsibly to a real-world healthcare context
+
+## Disclaimer
+
+> This project is built for **educational and research purposes only**. Its predictions are not medical advice, diagnoses, or treatment recommendations. Anyone with health concerns should consult a qualified healthcare professional.
 
 ---
 
-# 📚 Learning Outcomes
-
-- End-to-End Machine Learning Workflow  
-- Healthcare Data Analytics  
-- Data Preprocessing & Feature Engineering  
-- Model Training & Evaluation  
-- Model Deployment using Streamlit  
-- Frontend + Backend Integration  
-- AI Chatbot Integration using Gemini API  
-- GitHub Project Management & Version Control  
-- Cloud Deployment (Render & GitHub Pages)  
-- Healthcare AI Applications in Real-world Scenarios  
----
-
-# 🏆 Project Highlights
-
-- Real-world healthcare AI system with dual-model architecture  
-- Intelligent risk escalation (Maternal → Preeclampsia)  
-- AI-powered chatbot using Gemini API  
-- Fully deployed full-stack ML application  
-- End-to-end pipeline from dataset → deployment
----
-
-# ⚠️ Medical Disclaimer
-
-This application is developed for educational and research purposes only.
-
-The predictions generated by the system should not be considered medical advice, diagnosis, or treatment recommendations.
-
-Patients should always consult qualified healthcare professionals for medical decisions.
+<div align="center">
+<sub>Built with Python, scikit-learn, and Streamlit</sub>
+</div>
