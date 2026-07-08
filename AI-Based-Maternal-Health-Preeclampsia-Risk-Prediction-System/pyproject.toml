@@ -1,0 +1,17 @@
+[project]
+name = "prediction-of-preeclampsia"
+version = "0.1.0"
+description = "Preeclampsia prediction system"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+
+dependencies = [
+    "streamlit==1.41.1",
+    "pandas==2.2.2",
+    "numpy==2.0.2",
+    "scikit-learn==1.6.1",
+    "joblib==1.5.3",
+    "google-generativeai>=0.8.6",
+    "plotly>=5.20.0",
+    "python-dotenv>=1.0.1"
+]
