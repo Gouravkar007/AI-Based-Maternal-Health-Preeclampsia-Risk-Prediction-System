@@ -389,6 +389,154 @@ hr { border-color: var(--mh-border) !important; margin: 1.15rem 0 !important; }
 
 /* Streamlit progress bar */
 div[data-testid="stProgressBar"] > div > div { background-color: var(--mh-primary) !important; }
+
+/* Polished app shell overrides */
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    height: 0 !important;
+}
+#MainMenu, footer, div[data-testid="stToolbar"] {
+    visibility: hidden !important;
+    height: 0 !important;
+}
+.main .block-container {
+    padding-top: 1.1rem !important;
+}
+section[data-testid="stSidebar"] {
+    min-width: 260px !important;
+    box-shadow: 8px 0 24px rgba(15, 78, 67, 0.06);
+}
+section[data-testid="stSidebar"] > div {
+    padding-top: 1.5rem !important;
+}
+section[data-testid="stSidebar"] label[data-baseweb="radio"] {
+    min-height: 38px;
+    display: flex !important;
+    align-items: center !important;
+}
+section[data-testid="stSidebar"] label[data-baseweb="radio"] div:first-child {
+    margin-right: 0.45rem !important;
+}
+.mh-hero {
+    background: #ffffff;
+    border: 1px solid #d8e3e0;
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 0 14px;
+    box-shadow: 0 10px 28px rgba(32,55,50,0.07);
+}
+.mh-eyebrow {
+    color: #56635f;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+}
+.mh-title {
+    color: #17211f;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 750;
+    margin: 0;
+}
+.mh-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.mh-badge {
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.mh-badge.green {
+    color: #16623d;
+    background: #e8f7ef;
+    border: 1px solid #b8e7cc;
+}
+.mh-badge.blue {
+    color: #185fa5;
+    background: #e8f1fa;
+    border: 1px solid #c7ddf0;
+}
+.mh-badge.gray {
+    color: #47534f;
+    background: #f6f8f7;
+    border: 1px solid #d8e3e0;
+}
+.mh-progress {
+    background: #ffffff;
+    border: 1px solid #d8e3e0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 12px 0 16px;
+}
+.mh-progress-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.mh-progress-top p {
+    color: #56635f;
+    font-size: 12px;
+    margin: 0;
+}
+.mh-progress-bars {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 9px;
+}
+.mh-progress-bars div {
+    flex: 1;
+    height: 6px;
+    border-radius: 99px;
+}
+.mh-progress-labels {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+}
+.mh-progress-labels span {
+    color: #7a8783;
+    font-size: 11px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mh-progress-labels span.active {
+    color: #185fa5;
+}
+div.stButton > button,
+div[data-testid="stLinkButton"] > a,
+div.stDownloadButton > button {
+    min-height: 40px !important;
+}
+@media (max-width: 760px) {
+    .mh-hero {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .mh-badges {
+        justify-content: flex-start;
+    }
+    .mh-title {
+        font-size: 20px;
+    }
+    .mh-progress-labels {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -526,30 +674,15 @@ steps_done_hdr     = int(maternal_done_hdr) + int(preclamp_done_hdr)
 today_str = datetime.date.today().strftime("%B %Y")
 
 st.markdown(f"""
-<div style='background:rgba(255,255,255,0.88);border:1px solid var(--mh-border);
-     border-radius:12px;padding:1.25rem 1.75rem;display:flex;align-items:center;
-     justify-content:space-between;margin-bottom:1rem;box-shadow:0 14px 34px rgba(32,55,50,0.07);
-     backdrop-filter:blur(8px);'>
+<div class='mh-hero'>
   <div>
-    <p style='font-size:11px;color:var(--color-text-tertiary);margin:0 0 4px;
-       text-transform:uppercase;font-weight:700;'>Maternal health system</p>
-    <p style='font-size:21px;font-weight:750;margin:0;color:var(--color-text-primary);'>
-      🏥 Maternal &amp; Preeclampsia Assessment
-    </p>
+    <p class='mh-eyebrow'>Maternal health system</p>
+    <p class='mh-title'>Maternal &amp; Preeclampsia Assessment</p>
   </div>
-  <div style='display:flex;gap:8px;align-items:center;flex-wrap:wrap;'>
-    <div style='background:#E8F7EF;border:1px solid #B8E7CC;border-radius:999px;padding:5px 12px;
-        font-size:12px;color:#16623D;font-weight:700;'>
-      🤖 AI active
-    </div>
-    <div style='background:#FFFFFF;border:1px solid var(--color-border-tertiary);
-        border-radius:999px;padding:5px 12px;font-size:12px;color:var(--color-text-secondary);font-weight:650;'>
-      📅 {today_str}
-    </div>
-    <div style='background:#E8F1FA;border:1px solid #C7DDF0;border-radius:999px;padding:5px 12px;
-        font-size:12px;color:#2F6EA3;font-weight:700;'>
-      ✅ {steps_done_hdr}/2 steps done
-    </div>
+  <div class='mh-badges'>
+    <div class='mh-badge green'>AI active</div>
+    <div class='mh-badge gray'>{today_str}</div>
+    <div class='mh-badge blue'>{steps_done_hdr}/2 steps done</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -605,25 +738,23 @@ for i in range(len(MENU_OPTIONS)):
         color = "#185FA5"
     else:
         color = "var(--color-border-tertiary)"
-    dots_html += f"<div style='flex:1;height:5px;border-radius:3px;background:{color};'></div>"
+    dots_html += f"<div style='background:{color};'></div>"
 
 labels_html = ""
 for i in range(len(MENU_OPTIONS)):
-    lcolor  = "#185FA5" if i == current_idx else "var(--color-text-tertiary)"
-    lweight = "500"     if i == current_idx else "400"
-    labels_html += f"<span style='font-size:10px;color:{lcolor};font-weight:{lweight};'>{step_icons[i]} {step_labels[i]}</span>"
+    active_class = " class='active'" if i == current_idx else ""
+    labels_html += f"<span{active_class}>{step_icons[i]} {step_labels[i]}</span>"
 
 step_header = f"Step {current_idx + 1} of {len(MENU_OPTIONS)} &mdash; <b>{step_labels[current_idx]}</b>"
 
 st.markdown(f"""
-<div style='background:var(--color-background-secondary);border-radius:var(--border-radius-lg);
-     padding:0.9rem 1.25rem;margin-bottom:1rem;'>
-  <div style='display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;'>
-    <p style='font-size:12px;color:var(--color-text-secondary);margin:0;'>Assessment steps</p>
-    <p style='font-size:12px;color:var(--color-text-secondary);margin:0;'>{step_header}</p>
+<div class='mh-progress'>
+  <div class='mh-progress-top'>
+    <p>Assessment steps</p>
+    <p>{step_header}</p>
   </div>
-  <div style='display:flex;gap:4px;margin-bottom:10px;'>{dots_html}</div>
-  <div style='display:flex;justify-content:space-between;'>{labels_html}</div>
+  <div class='mh-progress-bars'>{dots_html}</div>
+  <div class='mh-progress-labels'>{labels_html}</div>
 </div>
 """, unsafe_allow_html=True)
 
