@@ -10,6 +10,8 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+import google.generativeai as genai 
+
 import streamlit as st
 import pandas as pd
 import json
@@ -112,11 +114,11 @@ def make_gauge(title, prob):
 def risk_pill(range_key):
     """Return a styled pill badge with icon for a given risk range."""
     if range_key == "low":
-        return "<span style='display:inline-flex;align-items:center;gap:5px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:500;'>✅ Low risk</span>"
+        return "<span style='display:inline-flex;align-items:center;gap:5px;background:#E8F7EF;color:#16623D;border:1px solid #B8E7CC;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:650;'>✅ Low risk</span>"
     elif range_key == "moderate":
-        return "<span style='display:inline-flex;align-items:center;gap:5px;background:#FAEEDA;color:#633806;border:0.5px solid #FAC775;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:500;'>⚠️ Moderate risk</span>"
+        return "<span style='display:inline-flex;align-items:center;gap:5px;background:#FFF4D8;color:#7A4D08;border:1px solid #F2D18B;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:650;'>⚠️ Moderate risk</span>"
     else:
-        return "<span style='display:inline-flex;align-items:center;gap:5px;background:#FCEBEB;color:#791F1F;border:0.5px solid #F7C1C1;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:500;'>🚨 High risk</span>"
+        return "<span style='display:inline-flex;align-items:center;gap:5px;background:#FDECEC;color:#8C2626;border:1px solid #F3B8B8;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:650;'>🚨 High risk</span>"
 
 # ============================================================================
 # IMPROVEMENT #3 — Helper: section header HTML (pill style)
@@ -124,10 +126,10 @@ def risk_pill(range_key):
 
 def section_header(icon, label):
     """Return a teal pill-style section header."""
-    return f"""<div style='background:#E1F5EE;border-radius:8px;padding:8px 14px;
-        display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;'>
+    return f"""<div style='background:#EDF7F4;border:1px solid #CDE7E0;border-radius:8px;padding:8px 14px;
+        display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;box-shadow:0 1px 2px rgba(17,24,39,0.04);'>
         <span style='font-size:16px;'>{icon}</span>
-        <span style='font-size:14px;font-weight:500;color:#085041;'>{label}</span>
+        <span style='font-size:14px;font-weight:650;color:#174A43;'>{label}</span>
     </div>"""
 
 # ============================================================================
@@ -198,13 +200,49 @@ st.set_page_config(
 )
 
 # ============================================================================
-# GLOBAL TEAL THEME
+# GLOBAL CLINICAL THEME
 # ============================================================================
 
 st.markdown("""
 <style>
-/* Page background */
-.stApp { background-color: #F4FCF8; }
+:root {
+    --mh-bg: #F7FAF9;
+    --mh-surface: #FFFFFF;
+    --mh-surface-soft: #F0F7F5;
+    --mh-primary: #176B5B;
+    --mh-primary-dark: #0F4E43;
+    --mh-primary-soft: #E1F2EE;
+    --mh-accent: #2F6EA3;
+    --mh-border: #D8E3E0;
+    --mh-border-strong: #BED5CF;
+    --mh-text: #17211F;
+    --mh-text-muted: #56635F;
+    --mh-text-faint: #7A8783;
+    --border-radius-md: 8px;
+    --border-radius-lg: 10px;
+    --color-background-primary: var(--mh-surface);
+    --color-background-secondary: var(--mh-surface-soft);
+    --color-border-tertiary: var(--mh-border);
+    --color-text-primary: var(--mh-text);
+    --color-text-secondary: var(--mh-text-muted);
+    --color-text-tertiary: var(--mh-text-faint);
+}
+
+/* Page background and spacing */
+.stApp {
+    background:
+        radial-gradient(circle at top left, rgba(23,107,91,0.08), transparent 30rem),
+        linear-gradient(180deg, #FBFDFC 0%, var(--mh-bg) 38%, #F4F8F7 100%);
+    color: var(--mh-text);
+}
+
+.block-container {
+    max-width: 1180px !important;
+    padding-top: 1.6rem !important;
+    padding-bottom: 2.5rem !important;
+}
+
+p, li, label, span, div { letter-spacing: 0 !important; }
 
 /* Mobile: stack columns on screens narrower than 640px */
 @media (max-width: 640px) {
@@ -220,56 +258,137 @@ st.markdown("""
 
 /* Sidebar background + right border */
 section[data-testid="stSidebar"] {
-    background-color: #E1F5EE;
-    border-right: 2px solid #0F6E56;
+    background: linear-gradient(180deg, #EAF5F2 0%, #F8FBFA 100%);
+    border-right: 1px solid var(--mh-border-strong);
 }
-section[data-testid="stSidebar"] * { color: #085041 !important; }
+section[data-testid="stSidebar"] * { color: #174A43 !important; }
+section[data-testid="stSidebar"] hr { margin: 0.85rem 0 !important; }
+section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
+    color: var(--mh-text-muted) !important;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    color: var(--mh-text) !important;
+    letter-spacing: 0 !important;
+}
+h1 {
+    font-size: 1.9rem !important;
+    font-weight: 750 !important;
+    margin-bottom: 1rem !important;
+}
 
 /* Section headers (####) left-border accent */
 h4 {
-    border-left: 4px solid #0F6E56;
+    border-left: 4px solid var(--mh-primary);
     padding-left: 10px;
     border-radius: 0;
-    color: #04342C !important;
+    color: var(--mh-text) !important;
 }
 
 /* h3 titles */
-h3 { color: #085041 !important; }
+h3 { color: var(--mh-primary-dark) !important; }
+
+/* Sidebar radio */
+div[data-testid="stRadio"] > div { gap: 0.25rem; }
+div[data-testid="stRadio"] label {
+    border-radius: 8px;
+    padding: 0.28rem 0.45rem;
+    color: #174A43 !important;
+}
+div[data-testid="stRadio"] label:hover { background: rgba(23,107,91,0.08); }
 
 /* Input fields: teal border */
 input[type="number"], input[type="text"], select, textarea {
-    border: 1px solid #9FE1CB !important;
-    border-radius: 6px !important;
+    border: 1px solid var(--mh-border-strong) !important;
+    border-radius: 8px !important;
+    background: #FFFFFF !important;
+    color: var(--mh-text) !important;
 }
 input[type="number"]:focus, input[type="text"]:focus, select:focus {
-    border-color: #0F6E56 !important;
-    box-shadow: 0 0 0 2px #9FE1CB !important;
+    border-color: var(--mh-primary) !important;
+    box-shadow: 0 0 0 3px rgba(23,107,91,0.16) !important;
+}
+div[data-baseweb="select"] > div {
+    border-color: var(--mh-border-strong) !important;
+    border-radius: 8px !important;
 }
 
-/* Primary buttons — full width + taller */
+/* Buttons */
+div.stButton > button,
+div[data-testid="stLinkButton"] > a,
+div.stDownloadButton > button {
+    border-radius: 8px !important;
+    border: 1px solid var(--mh-border-strong) !important;
+    background: #FFFFFF !important;
+    color: var(--mh-primary-dark) !important;
+    font-weight: 650 !important;
+    box-shadow: 0 1px 2px rgba(17,24,39,0.04) !important;
+}
+div.stButton > button:hover,
+div[data-testid="stLinkButton"] > a:hover,
+div.stDownloadButton > button:hover {
+    border-color: var(--mh-primary) !important;
+    background: var(--mh-primary-soft) !important;
+    color: var(--mh-primary-dark) !important;
+}
+
+/* Primary buttons - full width + taller */
 div.stButton > button[kind="primary"] {
-    background-color: #0F6E56 !important;
-    border-color: #0F6E56 !important;
-    color: #E1F5EE !important;
+    background: linear-gradient(180deg, #1F7A68 0%, var(--mh-primary) 100%) !important;
+    border-color: var(--mh-primary) !important;
+    color: #FFFFFF !important;
     width: 100% !important;
     padding: 0.65rem 1rem !important;
     font-size: 15px !important;
-    font-weight: 500 !important;
+    font-weight: 700 !important;
     border-radius: 8px !important;
+    box-shadow: 0 8px 18px rgba(23,107,91,0.18) !important;
 }
 div.stButton > button[kind="primary"]:hover {
-    background-color: #085041 !important;
-    border-color: #085041 !important;
+    background: linear-gradient(180deg, #176B5B 0%, var(--mh-primary-dark) 100%) !important;
+    border-color: var(--mh-primary-dark) !important;
+}
+button:disabled, button[disabled] {
+    background: #EEF2F1 !important;
+    color: #9AA5A2 !important;
+    border-color: #DCE5E2 !important;
+    box-shadow: none !important;
+}
+
+/* Cards, charts, tabs and alerts */
+div[data-testid="stForm"],
+div[data-testid="stDataFrame"],
+div[data-testid="stPlotlyChart"] {
+    background: var(--mh-surface) !important;
+    border: 1px solid var(--mh-border) !important;
+    border-radius: 10px !important;
+    padding: 0.65rem !important;
+    box-shadow: 0 10px 28px rgba(32,55,50,0.06) !important;
+}
+div[data-testid="stAlert"] {
+    border-radius: 9px !important;
+    border: 1px solid var(--mh-border) !important;
+    box-shadow: 0 1px 2px rgba(17,24,39,0.04) !important;
+}
+button[data-baseweb="tab"] {
+    border-radius: 8px 8px 0 0 !important;
+    color: var(--mh-text-muted) !important;
+}
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: var(--mh-primary-dark) !important;
+    background: var(--mh-primary-soft) !important;
+}
+.stMarkdown div[style*="border-radius:10px"],
+.stMarkdown div[style*="border-radius:12px"] {
+    box-shadow: 0 10px 26px rgba(32,55,50,0.055);
 }
 
 /* Horizontal rules */
-hr { border-color: #9FE1CB !important; }
+hr { border-color: var(--mh-border) !important; margin: 1.15rem 0 !important; }
 
 /* Streamlit progress bar */
-div[data-testid="stProgressBar"] > div > div { background-color: #0F6E56 !important; }
-
-/* Radio buttons in sidebar */
-div[data-testid="stRadio"] label { color: #085041 !important; }
+div[data-testid="stProgressBar"] > div > div { background-color: var(--mh-primary) !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -407,27 +526,28 @@ steps_done_hdr     = int(maternal_done_hdr) + int(preclamp_done_hdr)
 today_str = datetime.date.today().strftime("%B %Y")
 
 st.markdown(f"""
-<div style='background:var(--color-background-secondary);border-radius:var(--border-radius-lg);
-     padding:1.25rem 1.75rem;display:flex;align-items:center;justify-content:space-between;
-     margin-bottom:1rem;'>
+<div style='background:rgba(255,255,255,0.88);border:1px solid var(--mh-border);
+     border-radius:12px;padding:1.25rem 1.75rem;display:flex;align-items:center;
+     justify-content:space-between;margin-bottom:1rem;box-shadow:0 14px 34px rgba(32,55,50,0.07);
+     backdrop-filter:blur(8px);'>
   <div>
     <p style='font-size:11px;color:var(--color-text-tertiary);margin:0 0 4px;
-       text-transform:uppercase;letter-spacing:0.07em;'>Maternal health system</p>
-    <p style='font-size:20px;font-weight:500;margin:0;color:var(--color-text-primary);'>
+       text-transform:uppercase;font-weight:700;'>Maternal health system</p>
+    <p style='font-size:21px;font-weight:750;margin:0;color:var(--color-text-primary);'>
       🏥 Maternal &amp; Preeclampsia Assessment
     </p>
   </div>
   <div style='display:flex;gap:8px;align-items:center;flex-wrap:wrap;'>
-    <div style='background:#EAF3DE;border-radius:var(--border-radius-md);padding:5px 12px;
-        font-size:12px;color:#3B6D11;font-weight:500;'>
+    <div style='background:#E8F7EF;border:1px solid #B8E7CC;border-radius:999px;padding:5px 12px;
+        font-size:12px;color:#16623D;font-weight:700;'>
       🤖 AI active
     </div>
-    <div style='background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);
-        border-radius:var(--border-radius-md);padding:5px 12px;font-size:12px;color:var(--color-text-secondary);'>
+    <div style='background:#FFFFFF;border:1px solid var(--color-border-tertiary);
+        border-radius:999px;padding:5px 12px;font-size:12px;color:var(--color-text-secondary);font-weight:650;'>
       📅 {today_str}
     </div>
-    <div style='background:#E6F1FB;border-radius:var(--border-radius-md);padding:5px 12px;
-        font-size:12px;color:#185FA5;font-weight:500;'>
+    <div style='background:#E8F1FA;border:1px solid #C7DDF0;border-radius:999px;padding:5px 12px;
+        font-size:12px;color:#2F6EA3;font-weight:700;'>
       ✅ {steps_done_hdr}/2 steps done
     </div>
   </div>
@@ -730,7 +850,7 @@ elif menu == "👩‍⚕️ Maternal Check":
             model = load_model("maternal_health_model")
             prob  = model.predict_proba(maternal_data)[0][1] * 100
             st.session_state.maternal_result = {"probability": prob, "gestation": gestation}
-            st.session_state.maternal_timestamp = datetime.datetime.now().strftime("%-d %B %Y at %-I:%M %p")
+            st.session_state.maternal_timestamp = datetime.datetime.now().strftime("%#d %B %Y at %#I:%M %p")
             # Store shared fields so Step 2 can pre-fill them without re-entry
             st.session_state.prefill_age = age
             st.session_state.prefill_gestation = gestation
@@ -1087,7 +1207,7 @@ elif menu == "🫀 Preeclampsia Check":
             model = load_model("preeclampsia_model")
             prob  = model.predict_proba(preeclampsia_data)[0][1] * 100
             st.session_state.preeclampsia_result = {"probability": prob, "gestation": gestational_age}
-            st.session_state.preeclampsia_timestamp = datetime.datetime.now().strftime("%-d %B %Y at %-I:%M %p")
+            st.session_state.maternal_timestamp = datetime.datetime.now().strftime("%#d %B %Y at %#I:%M %p")
             st.rerun()
 
     if st.session_state.preeclampsia_result:
